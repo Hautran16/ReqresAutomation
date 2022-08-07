@@ -11,4 +11,4 @@ Feature: Check invalid method or url
     Examples: 
       | Url                               | Method | StatusCode | ErrorMessage  |
       | https://reqres.in/api/login       | GET    |        200 |  		null		|
-      | https://reqres.in/apifdafds/login | POST   |        404 |    null 	  |
+      | https://reqres.in/apifdafds/login | POST   |        404 |    null	  |

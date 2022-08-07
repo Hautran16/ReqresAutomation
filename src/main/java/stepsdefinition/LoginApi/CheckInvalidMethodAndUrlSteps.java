@@ -38,8 +38,10 @@ public class CheckInvalidMethodAndUrlSteps {
 
 	@Then("I validate the outcomes {string} and {string}")
 	public void thenIValidateTheOutcomes(String expectedStatusCode, String expectedErrorMessage) {
-
 		assertEquals(actualStatusCode, Integer.parseInt(expectedStatusCode));
+		if (actualErrorMesage == null) {
+			actualErrorMesage = "null";
+		}
 		assertEquals(actualErrorMesage, expectedErrorMessage);
 	}
 
