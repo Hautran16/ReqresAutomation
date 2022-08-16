@@ -25,14 +25,17 @@ public class CheckResponseWhenSendRequestSuccessfullySteps {
 		requestBody = givenRequestBody;
 	}
 
-	@When("send request")
+	@When("Send request")
 	public void send_request() {
 		String requestBody = "{\"email\": \"eve.holt@reqres.in\",\"password\": \"cityslicka\"}";
 		try {
-			HttpRequest request = HttpRequest.newBuilder().uri(new URI(url)).POST(HttpRequest.BodyPublishers.ofString(requestBody)).build();
+			HttpRequest request = HttpRequest.newBuilder()
+								.uri(new URI(url))
+								.header("Content-Type", "application/json")
+								.POST(HttpRequest.BodyPublishers.ofString(requestBody))
+								.build();
 			response =  HttpClient.newHttpClient().send(request, BodyHandlers.ofString());
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
