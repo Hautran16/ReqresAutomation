@@ -29,9 +29,9 @@ public class CheckInvalidMethodAndUrlSteps {
 	public void i_send_the_request() {
 		ApiUtils apiUtils = new ApiUtils();
 		String requestBody = "";
-		Response<Integer, String> result = apiUtils.sendRequest(method, url, requestBody);
-		actualStatusCode = result.getStatusCode();
-		String body = result.getResponseBody();
+		HttpResponse<String> result = apiUtils.sendRequest(method, url, requestBody);
+		actualStatusCode = result.statusCode();
+		String body = result.body();
 	}
 
 	@Then("I validate the outcomes {string} and {string}")

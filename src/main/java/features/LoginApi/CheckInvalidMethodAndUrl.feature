@@ -4,7 +4,7 @@ Feature: Check invalid method or url
 
   #TC1,2
   Scenario Outline: Check invalid method
-    Given I have "<Url>" and "<Method>"
+    Given I have "<Url>" and "<Method>" 
      When I send the request
      Then I validate the outcomes "<StatusCode>" and "<ErrorMessage>"
 

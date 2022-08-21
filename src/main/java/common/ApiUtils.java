@@ -10,7 +10,7 @@ public class ApiUtils {
 	
 	public enum Method{POST,GET};
 	
-	public Response<Integer, String> sendRequest(String method, String url, String requestBody) {
+	public Response<Integer, String> sendRequest1(String method, String url, String requestBody) {
 		HttpResponse<String> response = null;
 		Response<Integer, String> result = null;
 		
@@ -25,6 +25,18 @@ public class ApiUtils {
 		}
 		
 		return result;
+	}
+	
+	public HttpResponse<String> sendRequest(String method, String url, String requestBody){
+		HttpResponse<String> response = null;
+		if(method.equals(Method.POST)) {		
+			response = sendPostRequest(requestBody, url);
+			
+		} else if(method.equals(Method.GET)) {
+			response = sendGetRequest(url);	
+		}
+		
+		return response;
 	}
 	
 	public HttpResponse<String> sendPostRequest(String requestBody, String url) {
