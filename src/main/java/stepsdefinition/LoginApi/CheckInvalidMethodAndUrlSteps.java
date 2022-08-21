@@ -8,6 +8,8 @@ import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.net.http.HttpResponse.BodyHandlers;
 
+import common.ApiUtils;
+import common.Response;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -15,7 +17,7 @@ import io.cucumber.java.en.When;
 public class CheckInvalidMethodAndUrlSteps {
 	String url, method;
 	int actualStatusCode;
-	String actualErrorMesage;
+	String actualErrorMesage ;
 
 	@Given("I have {string} and {string}")
 	public void i_have_and(String givenUrl, String givenMethod) {
@@ -25,15 +27,11 @@ public class CheckInvalidMethodAndUrlSteps {
 
 	@When("I send the request")
 	public void i_send_the_request() {
-		HttpResponse<String> response = null;
+		ApiUtils apiUtils = new ApiUtils();
 		String requestBody = "";
-		if (method.equals("GET")) {
-			response = sendGetRequest();
-		} else if ((method.equals("POST"))) {
-			response = sendPostRequest(requestBody);
-		}
-		actualStatusCode = response.statusCode();
-		String body = response.body();
+		Response<Integer, String> result = apiUtils.sendRequest(method, url, requestBody);
+		actualStatusCode = result.getStatusCode();
+		String body = result.getResponseBody();
 	}
 
 	@Then("I validate the outcomes {string} and {string}")
@@ -44,37 +42,4 @@ public class CheckInvalidMethodAndUrlSteps {
 		}
 		assertEquals(actualErrorMesage, expectedErrorMessage);
 	}
-
-	public HttpResponse<String> sendPostRequest(String requestBody) {
-		HttpResponse<String> response = null;
-		try {
-			HttpRequest request = HttpRequest.newBuilder().uri(new URI(url))
-					.POST(HttpRequest.BodyPublishers.ofString(requestBody))
-					.build();
-			response = HttpClient.newHttpClient().send(request, BodyHandlers.ofString());
-			actualStatusCode = response.statusCode();
-			 String body = response.body();
-
-		} catch (Exception e) {
-			e.printStackTrace();
-			System.out.println("Send request fail");
-		}
-		return response;
-	}
-
-	public HttpResponse<String> sendGetRequest() {
-		HttpResponse<String> response = null;
-		try {
-			HttpRequest request = HttpRequest.newBuilder().uri(new URI(url)).GET().build();
-			response = HttpClient.newHttpClient().send(request, BodyHandlers.ofString());
-			actualStatusCode = response.statusCode();
-			 String body = response.body();
-
-		} catch (Exception e) {
-			e.printStackTrace();
-			System.out.println("Send get request fail");
-		}
-		return response;
-	}
-
 }
