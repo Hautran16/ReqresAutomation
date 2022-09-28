@@ -12,6 +12,7 @@ import org.json.simple.parser.ParseException;
 public class JsonUtils {
 	public String readJsonFile(String filePath) {
 		File file = new File(filePath);
+		
 		String jsonBody = "";
 		try {
 
@@ -20,8 +21,11 @@ public class JsonUtils {
 			JSONObject responseBodyJsonObj;
 
 			responseBodyJsonObj = (JSONObject) parser.parse(reader);
+			
+			System.out.println("File path:   " + filePath);
 
 			jsonBody = responseBodyJsonObj.toJSONString();
+			System.out.println("JsonBody :  " + jsonBody);
 		} catch ( IOException | ParseException e) {
 			System.out.println("File not found");
 			e.printStackTrace();

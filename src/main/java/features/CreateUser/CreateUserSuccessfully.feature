@@ -3,11 +3,12 @@ Feature: Create user succesfully
   I want to use this template for my feature file
 
   @MainCase
-  Scenario: Create user succesfully
+  Scenario Outline: Create user succesfully
     Given I have Url and Method and RequestBodyName
       | url                            | method | requestBodyName            |
-      | https://reqres.in/api/register | POST   | CreateUserRequetsBody.json |
-    When I send the request
+      | https://reqres.in/api/users | POST   | CreateUserRequestBody.json |
+    When I send the request with valid data
     Then Request reponse return "<statusCode>" and responseBody "<job>" and "<name>"
+    Examples:
       | statusCode | job    | name     |
       |        200 | leader | morpheus |

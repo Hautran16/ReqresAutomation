@@ -32,6 +32,9 @@ public class ApiUtils {
 		if(method.equals(Method.POST)) {		
 			response = sendPostRequest(requestBody, url);
 			
+			System.out.println("Method:  " + Method.POST);
+			System.out.println("response:  " + response);
+			
 		} else if(method.equals(Method.GET)) {
 			response = sendGetRequest(url);	
 		}
@@ -46,6 +49,7 @@ public class ApiUtils {
 					.POST(HttpRequest.BodyPublishers.ofString(requestBody))
 					.build();
 			response = HttpClient.newHttpClient().send(request, BodyHandlers.ofString());
+			System.out.println("Respone:   " + response);
 			//actualStatusCode = response.statusCode();
 			 //String body = response.body();
 

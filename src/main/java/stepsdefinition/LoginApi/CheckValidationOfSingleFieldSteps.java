@@ -14,7 +14,7 @@ public class CheckValidationOfSingleFieldSteps {
 	String url, method, requestBodyName;
 	HttpResponse<String> response ;
 
-	@Given("I have Url and Method and RequestBodyName")
+//	@Given("I have Url and Method and RequestBodyName")
 	public void i_have_url_and_method_and_request_body_name(List<Map<String, String>> loginTable) {
 		url = CucumberUtils.getValueByTableKey(loginTable, "url");
 		method = CucumberUtils.getValueByTableKey(loginTable, "method");
