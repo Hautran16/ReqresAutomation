@@ -3,7 +3,7 @@ Feature: Check validation of single field
 
   @Validation
   Scenario Outline: Check validation of single field
-    Given I have Url and Method and RequestBodyName
+    Given I have Url and Method and RequestBodyName abc
       | url                         | method | requestBodyName       |
       | https://reqres.in/api/login | POST   | LoginRequestBody.json |
     When I send the request "<FieldName>" and  "<Value>"

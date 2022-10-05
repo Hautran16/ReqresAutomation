@@ -19,13 +19,8 @@ public class JsonUtils {
 			FileReader reader = new FileReader(file);
 			JSONParser parser = new JSONParser();
 			JSONObject responseBodyJsonObj;
-
 			responseBodyJsonObj = (JSONObject) parser.parse(reader);
-			
-			System.out.println("File path:   " + filePath);
-
 			jsonBody = responseBodyJsonObj.toJSONString();
-			System.out.println("JsonBody :  " + jsonBody);
 		} catch ( IOException | ParseException e) {
 			System.out.println("File not found");
 			e.printStackTrace();

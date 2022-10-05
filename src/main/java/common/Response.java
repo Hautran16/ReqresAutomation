@@ -11,7 +11,7 @@ public class Response<Integer, String> {
 		this.responseBody = responseBody;
 	}
 	
-	public int getStatusCode() {
+	public int getStatusCode(int statusCode) {
 		return statusCode;
 	}
 

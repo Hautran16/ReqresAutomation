@@ -11,4 +11,4 @@ Feature: Create user succesfully
     Then Request reponse return "<statusCode>" and responseBody "<job>" and "<name>"
     Examples:
       | statusCode | job    | name     |
-      |        200 | leader | morpheus |
+      |        201 | leader | morpheus |
