@@ -36,16 +36,16 @@ public class CreateUserSuccessfully {
 	public void i_send_the_request_with_valid_data() {
 		ApiUtils apiUtils = new ApiUtils();
 		JsonUtils jsonUtils = new JsonUtils();
-//		String requestBody = jsonUtils.readJsonFile("/Users/mr.tuong/Dev/Automationtest/01Project/ReqresAutomationHau/src/main/resources/CreateUser/" + requestBodyName);
-		String requestBody = jsonUtils.readJsonFile(
-				"D:\\AutomationTest\\02Project\\02Git\\ReqresAutomation\\src\\main\\resources\\CreateUser\\"
-						+ requestBodyName);
+		String requestBody = jsonUtils.readJsonFile("/Users/mr.tuong/Dev/Automationtest/01Project/ReqresAutomationHau/src/main/resources/CreateUser/" + requestBodyName);
+////		String requestBody = jsonUtils.readJsonFile(
+//				"D:\\AutomationTest\\02Project\\02Git\\ReqresAutomation\\src\\main\\resources\\CreateUser\\"
+//						+ requestBodyName);
 //		HttpResponse<String> result = apiUtils.sendRequest(method, url, requestBody);
 //		actualStatusCode = result.statusCode();
 //		String body = result.body();
-		System.out.println("resultHậu:  " );
 		Response<Integer, String> result = apiUtils.sendRequest1(method, url, requestBody);
-		System.out.println("result:  " + result);
+		actualStatusCode = result.getStatusCode();
+		System.out.println("actualStatusCode:  " + actualStatusCode);
 	}
 
 	@Then("Request reponse return {string} and responseBody {string} and {string}")

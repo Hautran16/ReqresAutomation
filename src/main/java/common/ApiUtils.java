@@ -16,15 +16,11 @@ public class ApiUtils {
 
 	public Response<Integer, String> sendRequest1(String method, String url, String requestBody) {
 		HttpResponse<String> response = null;
-		Response<Integer, String> result = null;
+		Response<Integer, String> result = new Response<Integer, String>(0, requestBody) ;
 
 		if (method.equals(Method.POST.name())) {
-			System.out.println("Hậu hậu");
 			response = sendPostRequest(requestBody, url);
-			System.out.println("Status code:    " + response.statusCode());
-			
-			result.setStatusCode(201);
-			System.out.println("haudhiaudhkshdfkasfhkjksfh" + result);
+			result.setStatusCode(response.statusCode());
 			result.setResponseBody(response.body());
 		} else if (method.equals(Method.GET.name())) {
 			response = sendGetRequest(url);
