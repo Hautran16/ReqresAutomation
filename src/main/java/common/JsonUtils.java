@@ -1,10 +1,14 @@
 package common;
 
+import static org.testng.Assert.assertEquals;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.nio.file.Files;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -43,18 +47,33 @@ public class JsonUtils {
 		}
 
 	}
-	
-	public String getValuebykey(String responseBody, String key) {
+
+	public String getValueBykey(String responseBody, String key) {
 		String value = "";
-		JSONParser parser = new JSONParser(); 
+		JSONParser parser = new JSONParser();
 		try {
 			JSONObject bodyOjbect = (JSONObject) parser.parse(responseBody);
 			value = bodyOjbect.get(key).toString();
 		} catch (ParseException e) {
 			System.out.println("Convert fail");
 		}
-		
+
 		return value;
+	}
+
+	public ArrayList<String> getValueArrayListBykey(String responseBody, String key) {
+		ArrayList<String> valueArrayList = null;
+		JSONParser parser = new JSONParser();
+		try {
+			JSONObject bodyOjbect = (JSONObject) parser.parse(responseBody);
+			Object value = bodyOjbect.get(key);
+			String valueStr = value.toString();
+			valueArrayList = new ArrayList<>(Arrays.asList(valueStr));
+
+		} catch (ParseException e) {
+			System.out.println("Convert fail");
+		}
+		return valueArrayList;
 	}
 
 }

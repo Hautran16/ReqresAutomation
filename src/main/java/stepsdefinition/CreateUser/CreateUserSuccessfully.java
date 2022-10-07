@@ -57,19 +57,7 @@ public class CreateUserSuccessfully {
 		Response<Integer, String> result = apiUtils.sendRequest1(method, url, requestBody);
 		actualStatusCode = result.getStatusCode();
 		String responseBody = result.getResponseBody();
-
-		JSONParser parser = new JSONParser();
-		try {
-			JSONObject bodyOjbect = (JSONObject) parser.parse(responseBody);
-			Object actualName = bodyOjbect.get("name");
-			String actualNameStr = actualName.toString();
-			actualNameList = new ArrayList<>(Arrays.asList(actualNameStr));
-			System.out.println("actualName:    " + actualNameList);
-
-		} catch (ParseException e) {
-			System.out.println("Convert fail");
-		}
-
+		actualNameList = jsonUtils.getValueArrayListBykey(responseBody, "name");
 	}
 
 	@Then("Request reponse return {string} and responseBody {string} and {string}")
@@ -80,10 +68,10 @@ public class CreateUserSuccessfully {
 			// i is the index
 			// yourArrayList.get(i) is the element
 			if (actualNameList.get(i).equals(expectedName)) {
-				assertEquals(actualNameList.get(i), expectedName);
+				assertEquals(actualNameList.get(i), expectedName); 
 			}
-			
 		}
+		
 
 //		assertEquals(actualJob, expectedJob);
 	}
