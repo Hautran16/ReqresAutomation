@@ -16,7 +16,8 @@ public class ApiUtils {
 
 	public Response<Integer, String> sendRequest1(String method, String url, String requestBody) {
 		HttpResponse<String> response = null;
-		Response<Integer, String> result = new Response<Integer, String>(0, requestBody) ;
+
+		Response<Integer, String> result = new Response<Integer, String>(0, null);
 
 		if (method.equals(Method.POST.name())) {
 			response = sendPostRequest(requestBody, url);
@@ -35,7 +36,6 @@ public class ApiUtils {
 
 		HttpResponse<String> response = null;
 		if (method.equals(Method.POST.name())) {
-//			response = sendPostRequest(requestBody.toString(), url);
 			response = sendPostRequest(requestBody, url);
 		} else if (method.equals(Method.GET.name())) {
 			response = sendGetRequest(url);
@@ -48,14 +48,12 @@ public class ApiUtils {
 		HttpResponse<String> response = null;
 		try {
 			HttpRequest request = HttpRequest.newBuilder().uri(new URI(url))
-					.POST(HttpRequest.BodyPublishers.ofString(requestBody)).build();
-			response = HttpClient.newHttpClient().send(request, BodyHandlers.ofString());
-			// actualStatusCode = response.statusCode();
-			// String body = response.body();
-
+					.POST(HttpRequest.BodyPublishers.ofString(requestBody)).header("Content-Type", "application/json")
+					.build();
+			response = HttpClient.newHttpClient().send(request, HttpResponse.BodyHandlers.ofString());
 		} catch (Exception e) {
 			e.printStackTrace();
-			System.out.println("Send request fail");
+			System.out.println("Send Post request fail");
 		}
 		return response;
 	}
@@ -63,7 +61,8 @@ public class ApiUtils {
 	public HttpResponse<String> sendGetRequest(String url) {
 		HttpResponse<String> response = null;
 		try {
-			HttpRequest request = HttpRequest.newBuilder().uri(new URI(url)).GET().build();
+			HttpRequest request = HttpRequest.newBuilder().uri(new URI(url)).GET()
+					.header("Content-Type", "application/json").build();
 			response = HttpClient.newHttpClient().send(request, BodyHandlers.ofString());
 			// actualStatusCode = response.statusCode();
 			// String body = response.body();

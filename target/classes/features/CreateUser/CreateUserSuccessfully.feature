@@ -5,10 +5,12 @@ Feature: Create user succesfully
   @MainCase
   Scenario Outline: Create user succesfully
     Given I have Url and Method and RequestBodyName
-      | url                            | method | requestBodyName            |
-      | https://reqres.in/api/users | POST   | CreateUserRequestBody.json |
+      | url                         | method | requestBodyName                |
+      | https://reqres.in/api/users | POST   | CopyCreateUserRequestBody.json |
     When I send the request with valid data
     Then Request reponse return "<statusCode>" and responseBody "<job>" and "<name>"
-    Examples:
-      | statusCode | job    | name     |
-      |        201 | leader | morpheus |
+
+    Examples: 
+      | statusCode | job      | name       |
+      |        201 | leader   | morpheus   |
+      |        201 | leader33 | morpheus33 |
