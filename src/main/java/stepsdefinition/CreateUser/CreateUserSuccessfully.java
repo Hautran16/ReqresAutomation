@@ -5,6 +5,7 @@ import static org.testng.Assert.assertEquals;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -64,13 +65,21 @@ public class CreateUserSuccessfully {
 	public void request_reponse_return_and_response_body_and(String expectedStatusCode, String expectedJob,
 			String expectedName) {
 //		assertEquals(actualStatusCode, Integer.parseInt(expectedStatusCode));
-		for (int i = 0; i < actualNameList.size(); i++) {
-			// i is the index
-			// yourArrayList.get(i) is the element
-			if (actualNameList.get(i).equals(expectedName)) {
-				assertEquals(actualNameList.get(i), expectedName); 
-			}
-		}
+//		for (int i = 0; i < actualNameList.size(); i++) {
+//			// i is the index
+//			// yourArrayList.get(i) is the element
+//			if (actualNameList.get(i).equals(expectedName)) {
+//				assertEquals(actualNameList.get(i), expectedName); 
+//			}
+//		}
+		
+		Iterator<String> itr = actualNameList.iterator();
+		while (itr.hasNext()) {
+            Object element = itr.next();
+            element.toString();
+            System.out.println(element);
+            assertEquals(element, expectedName); 
+        }
 		
 
 //		assertEquals(actualJob, expectedJob);

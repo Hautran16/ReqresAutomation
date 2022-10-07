@@ -13,4 +13,3 @@ Feature: Create user succesfully
     Examples: 
       | statusCode | job      | name       |
       |        201 | leader   | morpheus   |
-      |        201 | leader33 | morpheus33 |
